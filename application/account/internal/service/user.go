@@ -38,7 +38,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *pb.CreateUserInfo) (*
 		NickName: user.NickName,
 		Gender:   user.Gender,
 		Role:     int32(user.Role),
-		Birthday: user.Birthday,
+		Birthday: uint64(user.Birthday),
 	}
 
 	return &userInfoRsp, nil
