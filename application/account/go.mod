@@ -6,6 +6,7 @@ require (
 	github.com/anaskhan96/go-password-encoder v0.0.0-20201010210601-c765b799fd72
 	github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20240202023911-c7fa51df7ae7
 	github.com/go-kratos/kratos/v2 v2.7.2
+	github.com/golang/protobuf v1.5.3
 	github.com/google/wire v0.6.0
 	github.com/hashicorp/consul/api v1.27.0
 	github.com/redis/go-redis/v9 v9.4.0
@@ -26,7 +27,6 @@ require (
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-playground/form/v4 v4.2.0 // indirect
-	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/subcommands v1.2.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
