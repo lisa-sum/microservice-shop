@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/go-kratos/kratos/v2/registry"
 	"os"
 
@@ -19,7 +20,7 @@ import (
 // go build -ldflags "-X main.Version=x.y.z"
 var (
 	// Name is the name of the compiled software.
-	Name = "kratos-shop.service.account"
+	Name = "microservice-shop.service.account"
 	// Version is the version of the compiled software.
 	Version = "v0.1.0"
 	// flagconf is the config flag.
@@ -34,7 +35,7 @@ func init() {
 
 func newApp(logger log.Logger, rr registry.Registrar, gs *grpc.Server) *kratos.App {
 	return kratos.New(
-		kratos.ID(id),
+		kratos.ID(fmt.Sprintf("%s %s", id, Version)),
 		kratos.Name(Name),
 		kratos.Version(Version),
 		kratos.Metadata(map[string]string{}),
