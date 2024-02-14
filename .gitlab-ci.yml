@@ -1,4 +1,5 @@
 stages:
+  - test
   - init
 #  - build
 #  - deploy
@@ -10,10 +11,17 @@ stages:
 #  WEB_APP_NAME: your-web-app
 
 cache:
-  key: microservice-shop-web
+  key: test1
   paths:
     - node_modules
     - dist
+
+test:
+  stage: init
+  tags:
+    - test1
+  script:
+    - echo "init test"
 
 init:
   stage: init
@@ -23,6 +31,7 @@ init:
 #    - test2
 #    - test3
   script:
+
     - npm install pnpm -g
     - ls
     - cd ./web && pnpm install
