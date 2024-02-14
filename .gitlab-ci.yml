@@ -18,8 +18,11 @@ stages:
 
 test1-job:
   stage: init
-#  tags:
-#    - test4
+  tags:
+    - test1
+    - test2
+    - test3
+    - test4
   script:
     - echo "init test"
 
