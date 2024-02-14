@@ -1,0 +1,49 @@
+stages:
+  - init
+#  - build
+#  - deploy
+
+#variables:
+#  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+#  HARBOR_ADDRESS: your.harbor.address
+#  PROJECT_NAME: your-project-name
+#  WEB_APP_NAME: your-web-app
+
+cache:
+  key: microservice-shop-web
+  paths:
+    - node_modules
+    - dist
+
+init:
+  stage: init
+  image: node:18-alpine
+  tags:
+    - edu-front-end
+  script:
+    - npm install pnpm -g
+    - ls
+    - cd ./web && pnpm install
+    #- cd ./client && pnpm install
+    - ls
+    #- pnpm eslint:fix && pnpm stylelint:fix
+    - pnpm build
+  only:
+    - main
+  artifacts:
+    paths:
+      - dist/
+
+# 构建Docker镜像并推送到Harbor
+#build_image:
+#  stage: build
+#  image: docker:19.03
+#  services:
+#    - docker:19.03-dind
+#  script:
+#    - docker login -u $HARBOR_USERNAME -p $HARBOR_PASSWORD $HARBOR_ADDRESS
+#    - docker build -t $IMAGE_TAG -f Dockerfile .
+#    - docker tag $IMAGE_TAG $HARBOR_ADDRESS/$PROJECT_NAME/$WEB_APP_NAME:$CI_COMMIT_TAG
+#    - docker push $HARBOR_ADDRESS/$PROJECT_NAME/$WEB_APP_NAME:$CI_COMMIT_TAG
+#  only:
+#    - tags
