@@ -11,7 +11,7 @@ stages:
 #  WEB_APP_NAME: your-web-app
 
 cache:
-  key: test3
+  key: test4
   paths:
     - node_modules
     - dist
@@ -29,7 +29,7 @@ init:
   tags:
 #    - test2
 #    - test1
-    - test3
+    - test4
   script:
 
     - npm install pnpm -g
