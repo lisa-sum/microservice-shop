@@ -11,15 +11,15 @@ stages:
 #  WEB_APP_NAME: your-web-app
 
 cache:
-  key: test2
+  key: test3
   paths:
     - node_modules
     - dist
 
 test1:
   stage: init
-  tags:
-    - test2
+  #tags:
+    #- test3
   script:
     - echo "init test"
 
@@ -27,9 +27,9 @@ init:
   stage: init
   image: node:18-alpine
   tags:
-    - test2
+#    - test2
 #    - test1
-#    - test3
+    - test3
   script:
 
     - npm install pnpm -g
