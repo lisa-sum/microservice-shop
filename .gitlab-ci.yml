@@ -19,7 +19,9 @@ init:
   stage: init
   image: node:18-alpine
   tags:
-    - edu-front-end
+    - test1
+    - test2
+    - test3
   script:
     - npm install pnpm -g
     - ls
