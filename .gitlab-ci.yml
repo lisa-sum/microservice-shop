@@ -20,8 +20,8 @@ init:
   image: node:18-alpine
   tags:
     - test1
-    - test2
-    - test3
+#    - test2
+#    - test3
   script:
     - npm install pnpm -g
     - ls
