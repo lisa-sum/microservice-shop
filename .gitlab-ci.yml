@@ -4,11 +4,12 @@ stages:
 #  - build
 #  - deploy
 
-#variables:
-#  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-#  HARBOR_ADDRESS: your.harbor.address
-#  PROJECT_NAME: your-project-name
-#  WEB_APP_NAME: your-web-app
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  HARBOR_ADDRESS: your.harbor.address
+  PROJECT_NAME: your-project-name
+  WEB_APP_NAME: your-web-app
+  RUNNER_TAG: "test4"
 
 #cache:
 #  key: test4
@@ -17,22 +18,21 @@ stages:
 #    - dist
 
 test1-job:
+  before_script:
+    - echo "job 运行之前要执行的"
   stage: init
-  tags:
-    - test1
-    - test2
-    - test3
-    - test4
+  tags: # job 要运行 Runner 的 tag
+    - ${RUNNER_TAG}
   script:
     - echo "init test"
+  after_script:
+    - echo "job 运行之后要执行的"
 
 init-job:
   stage: init
   image: node:18-alpine
   tags:
-    - test2
-    - test1
-    - test4
+    - ${RUNNER_TAG}
   script:
     - npm install pnpm -g
     - ls
