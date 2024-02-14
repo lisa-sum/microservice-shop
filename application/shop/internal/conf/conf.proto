@@ -1,5 +1,5 @@
 syntax = "proto3";
-package kratos.api;
+package shop.api;
 
 option go_package = "shop/internal/conf;conf";
 
@@ -8,6 +8,36 @@ import "google/protobuf/duration.proto";
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  Trace trace = 3; // 链路追踪
+  Auth auth = 4; // 认证鉴权
+  Service service = 5; // 服务注册与发现
+}
+
+message Service {
+  message Account { // 用户服务
+    string endpoint = 1;
+  }
+  message Goods { // 商品服务
+    string endpoint = 1;
+  }
+  Account account = 1;
+  Goods goods = 2;
+}
+
+message Trace {
+  string endpoint = 1;
+}
+
+message Registry {
+  message Consul {
+    string address = 1;
+    string scheme = 2;
+  }
+  Consul consul = 1;
+}
+
+message Auth {
+  string jwt_key = 1;
 }
 
 message Server {

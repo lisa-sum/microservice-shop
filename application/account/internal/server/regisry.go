@@ -9,11 +9,12 @@ import (
 
 // NewRegistrar 引入 consul
 func NewRegistrar(conf *conf.Registry) registry.Registrar {
-	c := api.DefaultConfig()
-	c.Address = conf.Consul.Address
-	c.Scheme = conf.Consul.Scheme
+	config := api.Config{
+		Address: conf.Consul.Address,
+		Scheme:  conf.Consul.Scheme,
+	}
 
-	cli, err := api.NewClient(c)
+	cli, err := api.NewClient(&config)
 	if err != nil {
 		panic(err)
 	}

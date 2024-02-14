@@ -1,15 +1,35 @@
 server:
   http:
-    addr: 0.0.0.0:8000
+    addr: 0.0.0.0:8001
     timeout: 1s
   grpc:
-    addr: 0.0.0.0:9000
+    addr: 0.0.0.0:9001
     timeout: 1s
 data:
   database:
-    driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test
+    host: 192.168.2.182
+    username: postgres
+    password: msdnmm
+    dbname: postgres
+    port: 5432
+    ssl_mode: disable
+    time_zone: Asia/Shanghai
+
   redis:
-    addr: 127.0.0.1:6379
+    user: master1
+    pass: "263393"
+    addr: 192.168.2.102:6379
+    db: 0
+    dial_timeout: 1s
     read_timeout: 0.2s
     write_timeout: 0.2s
+trace:
+#  endpoint: http://192.168.2.100:30188/api/traces
+  endpoint: 192.168.2.152:30507
+auth:
+  jwt_key: hqFr%3ddt32DGlSTOI5cO6@TH#fFwYnP$S
+service:
+  account:
+    endpoint: discovery:///microservice-shop.service.account
+  goods:
+    endpoint: discovery:///microservice-shop.service.goods
