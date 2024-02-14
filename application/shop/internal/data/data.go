@@ -2,6 +2,7 @@ package data
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-kratos/kratos/contrib/registry/consul/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -40,6 +41,7 @@ func NewData(c *conf.Data, uc userV1.UserClient, logger log.Logger) (*Data, func
 
 // NewUserServiceClient 链接用户服务 grpc
 func NewUserServiceClient(ac *conf.Auth, sr *conf.Service, rr registry.Discovery) userV1.UserClient {
+	fmt.Printf("%#v\n", sr.Account.Endpoint)
 	conn, err := grpc.DialInsecure(
 		context.Background(),
 		grpc.WithEndpoint(sr.Account.Endpoint),
@@ -48,7 +50,7 @@ func NewUserServiceClient(ac *conf.Auth, sr *conf.Service, rr registry.Discovery
 			tracing.Client(), // 链路追踪
 			recovery.Recovery(),
 		),
-		grpc.WithTimeout(2*time.Second),
+		grpc.WithTimeout(4*time.Second),
 		grpc.WithOptions(grpcx.WithStatsHandler(&tracing.ClientHandler{})),
 	)
 	if err != nil {

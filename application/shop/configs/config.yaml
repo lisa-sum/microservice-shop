@@ -31,5 +31,5 @@ auth:
 service:
   account:
     endpoint: discovery:///microservice-shop.service.account
-  goods:
+goods:
     endpoint: discovery:///microservice-shop.service.goods
