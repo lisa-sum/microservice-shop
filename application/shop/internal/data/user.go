@@ -22,7 +22,7 @@ func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 
 func (u *userRepo) CreateUser(c context.Context, user *biz.User) (*biz.User, error) {
 	createUser, err := u.data.uc.CreateUser(c, &userService.CreateUserInfo{
-		NickName: user.NickName,
+		Nickname: user.Nickname,
 		Password: user.Password,
 		Mobile:   user.Mobile,
 	})
@@ -32,7 +32,7 @@ func (u *userRepo) CreateUser(c context.Context, user *biz.User) (*biz.User, err
 	return &biz.User{
 		ID:       createUser.Id,
 		Mobile:   createUser.Mobile,
-		NickName: createUser.NickName,
+		Nickname: createUser.Nickname,
 	}, nil
 }
 
@@ -44,7 +44,7 @@ func (u *userRepo) UserByMobile(c context.Context, mobile string) (*biz.User, er
 	return &biz.User{
 		Mobile:   byMobile.Mobile,
 		ID:       byMobile.Id,
-		NickName: byMobile.NickName,
+		Nickname: byMobile.Nickname,
 	}, nil
 }
 
@@ -64,7 +64,7 @@ func (u *userRepo) UserById(c context.Context, id int64) (*biz.User, error) {
 	return &biz.User{
 		ID:       user.Id,
 		Mobile:   user.Mobile,
-		NickName: user.NickName,
+		Nickname: user.Nickname,
 		Gender:   user.Gender,
 		Role:     int(user.Role),
 	}, nil

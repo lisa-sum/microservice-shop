@@ -3,44 +3,44 @@
 
 openapi: 3.0.3
 info:
-    title: Shop API
+    title: ShopService API
     description: The Shop service definition.
     version: 0.0.1
 paths:
     /api/users/captcha:
         get:
             tags:
-                - Shop
-            operationId: Shop_Captcha
+                - ShopService
+            operationId: ShopService_Captcha
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/shop.proto.v1.CaptchaReply'
+                                $ref: '#/components/schemas/shop.v1.CaptchaReply'
     /api/users/detail:
         get:
             tags:
-                - Shop
-            operationId: Shop_Detail
+                - ShopService
+            operationId: ShopService_Detail
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/shop.proto.v1.UserDetailResponse'
+                                $ref: '#/components/schemas/shop.v1.UserDetailResponse'
     /api/users/login:
         post:
             tags:
-                - Shop
-            operationId: Shop_Login
+                - ShopService
+            operationId: ShopService_Login
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/shop.proto.v1.LoginReq'
+                            $ref: '#/components/schemas/shop.v1.LoginReq'
                 required: true
             responses:
                 "200":
@@ -48,17 +48,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/shop.proto.v1.RegisterReply'
+                                $ref: '#/components/schemas/shop.v1.RegisterReply'
     /api/users/register:
         post:
             tags:
-                - Shop
-            operationId: Shop_Register
+                - ShopService
+            operationId: ShopService_Register
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/shop.proto.v1.RegisterReq'
+                            $ref: '#/components/schemas/shop.v1.RegisterReq'
                 required: true
             responses:
                 "200":
@@ -66,17 +66,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/shop.proto.v1.RegisterReply'
+                                $ref: '#/components/schemas/shop.v1.RegisterReply'
 components:
     schemas:
-        shop.proto.v1.CaptchaReply:
+        shop.v1.CaptchaReply:
             type: object
             properties:
                 captchaId:
                     type: string
                 picPath:
                     type: string
-        shop.proto.v1.LoginReq:
+        shop.v1.LoginReq:
             type: object
             properties:
                 mobile:
@@ -87,7 +87,7 @@ components:
                     type: string
                 captchaId:
                     type: string
-        shop.proto.v1.RegisterReply:
+        shop.v1.RegisterReply:
             type: object
             properties:
                 id:
@@ -101,7 +101,7 @@ components:
                 expiredAt:
                     type: string
             description: Data returned by registration and login
-        shop.proto.v1.RegisterReq:
+        shop.v1.RegisterReq:
             type: object
             properties:
                 mobile:
@@ -110,14 +110,14 @@ components:
                     type: string
                 password:
                     type: string
-        shop.proto.v1.UserDetailResponse:
+        shop.v1.UserDetailResponse:
             type: object
             properties:
                 id:
                     type: string
                 mobile:
                     type: string
-                nickName:
+                nickname:
                     type: string
                 birthday:
                     type: string
@@ -128,4 +128,4 @@ components:
                     format: int32
             description: user Detail returned
 tags:
-    - name: Shop
+    - name: ShopService

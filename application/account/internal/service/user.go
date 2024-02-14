@@ -26,7 +26,7 @@ func (us *UserService) CreateUser(ctx context.Context, req *v1.CreateUserInfo) (
 	user, err := us.uc.Create(ctx, &biz.User{
 		Mobile:   req.Mobile,
 		Password: req.Password,
-		NickName: req.NickName,
+		Nickname: req.Nickname,
 	})
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func (us *UserService) CreateUser(ctx context.Context, req *v1.CreateUserInfo) (
 		Id:       user.ID,
 		Mobile:   user.Mobile,
 		Password: user.Password,
-		NickName: user.NickName,
+		Nickname: user.Nickname,
 		Gender:   user.Gender,
 		Role:     int32(user.Role),
 		Birthday: uint64(user.Birthday),
@@ -67,7 +67,7 @@ func UserResponse(user *biz.User) v1.UserInfoResponse {
 		Id:       user.ID,
 		Mobile:   user.Mobile,
 		Password: user.Password,
-		NickName: user.NickName,
+		Nickname: user.Nickname,
 		Gender:   user.Gender,
 		Role:     int32(user.Role),
 		Birthday: uint64(user.Birthday),
@@ -92,7 +92,7 @@ func (us *UserService) UpdateUser(ctx context.Context, req *v1.UpdateUserInfo) (
 		ID:       req.Id,
 		Gender:   req.Gender,
 		Birthday: int64(req.Birthday),
-		NickName: req.NickName,
+		Nickname: req.Nickname,
 	})
 
 	if err != nil {

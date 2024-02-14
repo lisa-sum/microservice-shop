@@ -7,15 +7,15 @@ import (
 
 type CustomClaims struct {
 	ID          int64
-	NickName    string
+	Nickname    string
 	AuthorityId int
 	// jwt.StandardClaims
 	jwt.RegisteredClaims
 }
 
-func CreateToken(c CustomClaims, key string) (string, error) {
-	claims := jwt.NewWithClaims(jwt.SigningMethodES512, c)
-	signedToken, err := claims.SignedString([]byte(key))
+func CreateToken(claims CustomClaims, key string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	signedToken, err := token.SignedString([]byte(key))
 	if err != nil {
 		return "", errors.New("generate token fail" + err.Error())
 	}

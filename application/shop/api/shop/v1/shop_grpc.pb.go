@@ -20,200 +20,200 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Shop_Register_FullMethodName = "/shop.proto.v1.Shop/Register"
-	Shop_Login_FullMethodName    = "/shop.proto.v1.Shop/Login"
-	Shop_Captcha_FullMethodName  = "/shop.proto.v1.Shop/Captcha"
-	Shop_Detail_FullMethodName   = "/shop.proto.v1.Shop/Detail"
+	ShopService_Register_FullMethodName = "/shop.v1.ShopService/Register"
+	ShopService_Login_FullMethodName    = "/shop.v1.ShopService/Login"
+	ShopService_Captcha_FullMethodName  = "/shop.v1.ShopService/Captcha"
+	ShopService_Detail_FullMethodName   = "/shop.v1.ShopService/Detail"
 )
 
-// ShopClient is the client API for Shop service.
+// ShopServiceClient is the client API for ShopService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ShopClient interface {
+type ShopServiceClient interface {
 	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterReply, error)
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*RegisterReply, error)
 	Captcha(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CaptchaReply, error)
 	Detail(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserDetailResponse, error)
 }
 
-type shopClient struct {
+type shopServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewShopClient(cc grpc.ClientConnInterface) ShopClient {
-	return &shopClient{cc}
+func NewShopServiceClient(cc grpc.ClientConnInterface) ShopServiceClient {
+	return &shopServiceClient{cc}
 }
 
-func (c *shopClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterReply, error) {
+func (c *shopServiceClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterReply, error) {
 	out := new(RegisterReply)
-	err := c.cc.Invoke(ctx, Shop_Register_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ShopService_Register_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *shopClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*RegisterReply, error) {
+func (c *shopServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*RegisterReply, error) {
 	out := new(RegisterReply)
-	err := c.cc.Invoke(ctx, Shop_Login_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ShopService_Login_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *shopClient) Captcha(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CaptchaReply, error) {
+func (c *shopServiceClient) Captcha(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CaptchaReply, error) {
 	out := new(CaptchaReply)
-	err := c.cc.Invoke(ctx, Shop_Captcha_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ShopService_Captcha_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *shopClient) Detail(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserDetailResponse, error) {
+func (c *shopServiceClient) Detail(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserDetailResponse, error) {
 	out := new(UserDetailResponse)
-	err := c.cc.Invoke(ctx, Shop_Detail_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ShopService_Detail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ShopServer is the server API for Shop service.
-// All implementations must embed UnimplementedShopServer
+// ShopServiceServer is the server API for ShopService service.
+// All implementations must embed UnimplementedShopServiceServer
 // for forward compatibility
-type ShopServer interface {
+type ShopServiceServer interface {
 	Register(context.Context, *RegisterReq) (*RegisterReply, error)
 	Login(context.Context, *LoginReq) (*RegisterReply, error)
 	Captcha(context.Context, *emptypb.Empty) (*CaptchaReply, error)
 	Detail(context.Context, *emptypb.Empty) (*UserDetailResponse, error)
-	mustEmbedUnimplementedShopServer()
+	mustEmbedUnimplementedShopServiceServer()
 }
 
-// UnimplementedShopServer must be embedded to have forward compatible implementations.
-type UnimplementedShopServer struct {
+// UnimplementedShopServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedShopServiceServer struct {
 }
 
-func (UnimplementedShopServer) Register(context.Context, *RegisterReq) (*RegisterReply, error) {
+func (UnimplementedShopServiceServer) Register(context.Context, *RegisterReq) (*RegisterReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedShopServer) Login(context.Context, *LoginReq) (*RegisterReply, error) {
+func (UnimplementedShopServiceServer) Login(context.Context, *LoginReq) (*RegisterReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedShopServer) Captcha(context.Context, *emptypb.Empty) (*CaptchaReply, error) {
+func (UnimplementedShopServiceServer) Captcha(context.Context, *emptypb.Empty) (*CaptchaReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Captcha not implemented")
 }
-func (UnimplementedShopServer) Detail(context.Context, *emptypb.Empty) (*UserDetailResponse, error) {
+func (UnimplementedShopServiceServer) Detail(context.Context, *emptypb.Empty) (*UserDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Detail not implemented")
 }
-func (UnimplementedShopServer) mustEmbedUnimplementedShopServer() {}
+func (UnimplementedShopServiceServer) mustEmbedUnimplementedShopServiceServer() {}
 
-// UnsafeShopServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ShopServer will
+// UnsafeShopServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ShopServiceServer will
 // result in compilation errors.
-type UnsafeShopServer interface {
-	mustEmbedUnimplementedShopServer()
+type UnsafeShopServiceServer interface {
+	mustEmbedUnimplementedShopServiceServer()
 }
 
-func RegisterShopServer(s grpc.ServiceRegistrar, srv ShopServer) {
-	s.RegisterService(&Shop_ServiceDesc, srv)
+func RegisterShopServiceServer(s grpc.ServiceRegistrar, srv ShopServiceServer) {
+	s.RegisterService(&ShopService_ServiceDesc, srv)
 }
 
-func _Shop_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ShopService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShopServer).Register(ctx, in)
+		return srv.(ShopServiceServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Shop_Register_FullMethodName,
+		FullMethod: ShopService_Register_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShopServer).Register(ctx, req.(*RegisterReq))
+		return srv.(ShopServiceServer).Register(ctx, req.(*RegisterReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shop_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ShopService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShopServer).Login(ctx, in)
+		return srv.(ShopServiceServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Shop_Login_FullMethodName,
+		FullMethod: ShopService_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShopServer).Login(ctx, req.(*LoginReq))
+		return srv.(ShopServiceServer).Login(ctx, req.(*LoginReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shop_Captcha_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ShopService_Captcha_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShopServer).Captcha(ctx, in)
+		return srv.(ShopServiceServer).Captcha(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Shop_Captcha_FullMethodName,
+		FullMethod: ShopService_Captcha_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShopServer).Captcha(ctx, req.(*emptypb.Empty))
+		return srv.(ShopServiceServer).Captcha(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shop_Detail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ShopService_Detail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ShopServer).Detail(ctx, in)
+		return srv.(ShopServiceServer).Detail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Shop_Detail_FullMethodName,
+		FullMethod: ShopService_Detail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ShopServer).Detail(ctx, req.(*emptypb.Empty))
+		return srv.(ShopServiceServer).Detail(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Shop_ServiceDesc is the grpc.ServiceDesc for Shop service.
+// ShopService_ServiceDesc is the grpc.ServiceDesc for ShopService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Shop_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "shop.proto.v1.Shop",
-	HandlerType: (*ShopServer)(nil),
+var ShopService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "shop.v1.ShopService",
+	HandlerType: (*ShopServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Register",
-			Handler:    _Shop_Register_Handler,
+			Handler:    _ShopService_Register_Handler,
 		},
 		{
 			MethodName: "Login",
-			Handler:    _Shop_Login_Handler,
+			Handler:    _ShopService_Login_Handler,
 		},
 		{
 			MethodName: "Captcha",
-			Handler:    _Shop_Captcha_Handler,
+			Handler:    _ShopService_Captcha_Handler,
 		},
 		{
 			MethodName: "Detail",
-			Handler:    _Shop_Detail_Handler,
+			Handler:    _ShopService_Detail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

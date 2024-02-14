@@ -3,18 +3,17 @@ package data
 import (
 	"context"
 	"github.com/go-kratos/kratos/contrib/registry/consul/v2"
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
+	"github.com/google/wire"
 	"github.com/hashicorp/consul/api"
 	grpcx "google.golang.org/grpc"
+	userV1 "shop/api/user/v1"
 	"shop/internal/conf"
 	"time"
-
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/google/wire"
-	userV1 "shop/api/user/v1"
 	// userV1 "github.com/lisa-sum/microservice-shop/application/account/api/user/v1"
 )
 

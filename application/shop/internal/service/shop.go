@@ -8,7 +8,7 @@ import (
 
 // ShopService is a shop service.
 type ShopService struct {
-	v1.UnimplementedShopServer
+	v1.UnimplementedShopServiceServer
 
 	uc  *biz.UserUsecase
 	log *log.Helper

@@ -43,12 +43,12 @@ func initTracer(url string) error {
 // NewGRPCServer new a gRPC server.
 func NewGRPCServer(
 	c *conf.Server,
-	// tr *conf.Trace,
+	tr *conf.Trace,
 	logger log.Logger,
 	us *service.UserService,
 ) *grpc.Server {
-	// err := initTracer(tr.Endpoint)
-	err := initTracer("192.168.2.152:30507")
+	err := initTracer(tr.Endpoint)
+	// err := initTracer("192.168.2.152:30507")
 	if err != nil {
 		panic(err)
 	}

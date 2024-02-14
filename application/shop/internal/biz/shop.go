@@ -6,6 +6,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
 	jwt2 "github.com/golang-jwt/jwt/v4"
+	"gorm.io/gorm"
 	v1 "shop/api/shop/v1"
 	"shop/internal/conf"
 	"shop/internal/pkg/captcha"
@@ -29,14 +30,17 @@ var (
 type User struct {
 	ID        int64
 	Mobile    string
-	NickName  string
+	Nickname  string
 	Birthday  int64
 	Gender    string
 	Role      int
-	CreatedAt time.Time
+	CreatedAt uint64 `gorm:"column:created_at"`
+	UpdatedAt uint64 `gorm:"column:updated_at"`
+	DeletedAt gorm.DeletedAt
 	Password  string
 }
 
+//go:generate mockery --name UserRepo
 type UserRepo interface {
 	CreateUser(c context.Context, u *User) (*User, error)
 	UserByMobile(ctx context.Context, mobile string) (*User, error)
@@ -85,7 +89,7 @@ func (uc *UserUsecase) UserDetailByID(ctx context.Context) (*v1.UserDetailRespon
 	}
 	return &v1.UserDetailResponse{
 		Id:       user.ID,
-		NickName: user.NickName,
+		Nickname: user.Nickname,
 		Mobile:   user.Mobile,
 	}, nil
 }
@@ -113,12 +117,16 @@ func (uc *UserUsecase) PassWordLogin(ctx context.Context, req *v1.LoginReq) (*v1
 			if passRsp {
 				claims := auth.CustomClaims{
 					ID:          user.ID,
-					NickName:    user.NickName,
+					Nickname:    user.Nickname,
 					AuthorityId: user.Role,
 					RegisteredClaims: jwt2.RegisteredClaims{
-						NotBefore: jwt2.NewNumericDate(time.Now()),                          // 签名生效时间
-						ExpiresAt: jwt2.NewNumericDate(time.Now().Add(24 * time.Hour * 30)), // 过期时间, 30天
-						Issuer:    "Gyl",
+						ExpiresAt: jwt2.NewNumericDate(time.Now().Add(24 * time.Hour)),
+						IssuedAt:  jwt2.NewNumericDate(time.Now()),
+						NotBefore: jwt2.NewNumericDate(time.Now()),
+						// Subject:   "somebody",
+						// ID:        "1",
+						// Audience:  []string{"somebody_else"},
+						Issuer: "Gyl",
 					},
 				}
 
@@ -129,7 +137,7 @@ func (uc *UserUsecase) PassWordLogin(ctx context.Context, req *v1.LoginReq) (*v1
 				return &v1.RegisterReply{
 					Id:        user.ID,
 					Mobile:    user.Mobile,
-					Username:  user.NickName,
+					Username:  user.Nickname,
 					Token:     token,
 					ExpiredAt: time.Now().Unix() + 60*60*24*30,
 				}, nil
@@ -151,12 +159,16 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, req *v1.RegisterReq) (*v1
 	}
 	claims := auth.CustomClaims{
 		ID:          createUser.ID,
-		NickName:    createUser.NickName,
+		Nickname:    createUser.Nickname,
 		AuthorityId: createUser.Role,
 		RegisteredClaims: jwt2.RegisteredClaims{
-			NotBefore: jwt2.NewNumericDate(time.Now()),                          // 签名生效时间
-			ExpiresAt: jwt2.NewNumericDate(time.Now().Add(24 * time.Hour * 30)), // 过期时间, 30天
-			Issuer:    "Gyl",
+			ExpiresAt: jwt2.NewNumericDate(time.Now().Add(24 * time.Hour)),
+			IssuedAt:  jwt2.NewNumericDate(time.Now()),
+			NotBefore: jwt2.NewNumericDate(time.Now()),
+			// Subject:   "somebody",
+			// ID:        "1",
+			// Audience:  []string{"somebody_else"},
+			Issuer: "Gyl",
 		},
 	}
 	token, err := auth.CreateToken(claims, uc.signingKey)
@@ -167,7 +179,7 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, req *v1.RegisterReq) (*v1
 	return &v1.RegisterReply{
 		Id:        createUser.ID,
 		Mobile:    createUser.Mobile,
-		Username:  createUser.NickName,
+		Username:  createUser.Nickname,
 		Token:     token,
 		ExpiredAt: time.Now().Unix() + 60*60*24*30,
 	}, nil
@@ -175,20 +187,21 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, req *v1.RegisterReq) (*v1
 
 func NewUser(mobile, username, password string) (User, error) {
 	// check mobile
-	if len(mobile) <= 0 {
+	if len(mobile) <= 10 {
 		return User{}, ErrMobileInvalid
 	}
 	// check username
-	if len(username) <= 0 {
+	if len(username) <= 3 {
 		return User{}, ErrUsernameInvalid
 	}
 	// check password
-	if len(password) <= 0 {
+	if len(password) <= 8 {
 		return User{}, ErrPasswordInvalid
 	}
 	return User{
-		Mobile:   mobile,
-		NickName: username,
-		Password: password,
+		Mobile:    mobile,
+		Nickname:  username,
+		Password:  password,
+		CreatedAt: uint64(time.Now().Unix()),
 	}, nil
 }

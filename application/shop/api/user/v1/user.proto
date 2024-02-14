@@ -87,7 +87,7 @@ message UserInfoResponse{
   int64 id = 1;
   string password = 2;
   string mobile = 3;
-  string nickName = 4;
+  string nickname = 4;
   uint64 birthday = 5;
   string gender = 6;
   int32 role = 7;
@@ -109,14 +109,14 @@ message IdRequest{
 
 // 创建用户
 message  CreateUserInfo{
-  string nickName = 1;
+  string nickname = 1 [json_name="nickname"];
   string password = 2;
   string mobile = 3;
 }
 
 message  UpdateUserInfo{
   int64 id = 1;
-  string nickName = 2;
+  string nickname = 2;
   string gender = 3;
   uint64 birthday = 4;
 }

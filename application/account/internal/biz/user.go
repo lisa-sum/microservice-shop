@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 	"github.com/go-kratos/kratos/v2/log"
-	"time"
+	"gorm.io/gorm"
 )
 
 // User 定义返回数据结构体
@@ -11,11 +11,13 @@ type User struct {
 	ID        int64
 	Mobile    string
 	Password  string
-	NickName  string
+	Nickname  string
 	Birthday  int64
 	Gender    string
 	Role      int
-	CreatedAt time.Time
+	CreatedAt uint64 `gorm:"created_at"`
+	UpdatedAt uint64 `gorm:"updated_at"`
+	DeletedAt gorm.DeletedAt
 }
 
 type UserRepo interface {
