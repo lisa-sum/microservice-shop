@@ -30,8 +30,8 @@ init-job:
   stage: init
   image: node:18-alpine
   tags:
-#    - test2
-#    - test1
+    - test2
+    - test1
     - test4
   script:
     - npm install pnpm -g
