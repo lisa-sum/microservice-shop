@@ -23,7 +23,7 @@ test1-job:
   script:
     - echo "init test"
 
-init:
+init-job:
   stage: init
   image: node:18-alpine
   tags:
