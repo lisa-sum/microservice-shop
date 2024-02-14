@@ -9,7 +9,7 @@ variables:
   HARBOR_ADDRESS: your.harbor.address
   PROJECT_NAME: your-project-name
   WEB_APP_NAME: your-web-app
-  RUNNER_TAG: "test3"
+  RUNNER_TAG: "test2"
 
 #cache:
 #  key: test4
