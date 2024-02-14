@@ -18,8 +18,8 @@ cache:
 
 test1:
   stage: init
-  #tags:
-    #- test3
+  tags:
+    - test4
   script:
     - echo "init test"
 
