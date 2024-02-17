@@ -80,7 +80,7 @@ func main() {
 	}
 
 	var tc conf.Trace
-	if err := c.Scan(&rc); err != nil {
+	if err := c.Scan(&tc); err != nil {
 		panic(err)
 	}
 

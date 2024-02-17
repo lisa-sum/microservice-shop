@@ -23,6 +23,5 @@ data:
     dial_timeout: 1s
     read_timeout: 0.2s
     write_timeout: 0.2s
-trace:
-#  endpoint: http://192.168.2.100:30188/api/traces
-  endpoint: 192.168.2.152:30507
+jaeger:
+  endpoint: "192.168.2.152:30507"

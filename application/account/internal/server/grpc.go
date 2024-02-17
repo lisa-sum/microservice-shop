@@ -4,6 +4,7 @@ import (
 	v1 "account/api/user/v1"
 	"account/internal/conf"
 	"account/internal/service"
+	"context"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -11,16 +12,18 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/exporters/jaeger"
+	// "go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.24.0"
 )
 
 // 设置全局trace
-func initTracer(url string) error {
+func initTracer(ctx context.Context, url string) error {
 	// 创建 Jaeger exporter
-	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
+	// exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
+	otlpExp, err := otlptracegrpc.New(ctx, otlptracegrpc.WithInsecure(), otlptracegrpc.WithEndpoint(url))
 	if err != nil {
 		return err
 	}
@@ -28,7 +31,8 @@ func initTracer(url string) error {
 		// 将基于父span的采样率设置为100%
 		tracesdk.WithSampler(tracesdk.ParentBased(tracesdk.TraceIDRatioBased(1.0))),
 		// 始终确保在生产中批量处理
-		tracesdk.WithBatcher(exp),
+		tracesdk.WithBatcher(otlpExp),
+		// tracesdk.WithBatcher(exp),
 		// 在资源中记录有关此应用程序的信息
 		tracesdk.WithResource(resource.NewSchemaless(
 			semconv.ServiceNameKey.String("kratos-trace"),
@@ -47,8 +51,8 @@ func NewGRPCServer(
 	logger log.Logger,
 	us *service.UserService,
 ) *grpc.Server {
-	err := initTracer(tr.Endpoint)
-	// err := initTracer("192.168.2.152:30507")
+	err := initTracer(context.Background(), tr.Jaeger.Endpoint)
+	// err := initTracer(context.Background(), "192.168.2.152:30507")
 	if err != nil {
 		panic(err)
 	}
