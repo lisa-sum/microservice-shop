@@ -904,7 +904,7 @@ checksum = "5cc16584ff22b460a382b7feec54b23d2908d858152e5739a120b949293bd74e"
 dependencies = [
  "cc",
  "libc",
- "log",
+ "helper",
  "rustversion",
  "windows 0.48.0",
 ]
@@ -1036,7 +1036,7 @@ checksum = "57da3b9b5b85bd66f31093f8c408b90a74431672542466497dcbdfdc02034be1"
 dependencies = [
  "aho-corasick",
  "bstr",
- "log",
+ "helper",
  "regex-automata 0.4.5",
  "regex-syntax 0.8.2",
 ]
@@ -1152,7 +1152,7 @@ version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bea68cab48b8459f17cf1c944c67ddc572d272d9f2b274140f223ecb1da4a3b7"
 dependencies = [
- "log",
+ "helper",
  "mac",
  "markup5ever",
  "proc-macro2",
@@ -1234,7 +1234,7 @@ checksum = "b46810df39e66e925525d6e38ce1e7f6e1d208f72dc39757880fcb66e2c58af1"
 dependencies = [
  "crossbeam-deque",
  "globset",
- "log",
+ "helper",
  "memchr",
  "regex-automata 0.4.5",
  "same-file",
@@ -1338,7 +1338,7 @@ dependencies = [
  "cesu8",
  "combine",
  "jni-sys",
- "log",
+ "helper",
  "thiserror",
  "walkdir",
 ]
@@ -1432,7 +1432,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "log"
+name = "helper"
 version = "0.4.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5e6163cb8c49088c2c36f57875e58ccd8c87c7427f7fbd50ea6710b2f3f2e8f"
@@ -1473,7 +1473,7 @@ version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a2629bb1404f3d34c2e921f21fd34ba00b206124c81f65c50b43b6aaefeb016"
 dependencies = [
- "log",
+ "helper",
  "phf 0.10.1",
  "phf_codegen 0.10.0",
  "string_cache",
@@ -2238,7 +2238,7 @@ dependencies = [
  "cssparser",
  "derive_more",
  "fxhash",
- "log",
+ "helper",
  "matches",
  "phf 0.8.0",
  "phf_codegen 0.8.0",
@@ -2568,7 +2568,7 @@ dependencies = [
  "jni",
  "lazy_static",
  "libc",
- "log",
+ "helper",
  "ndk",
  "ndk-context",
  "ndk-sys",
@@ -2777,7 +2777,7 @@ dependencies = [
  "infer",
  "json-patch",
  "kuchikiki",
- "log",
+ "helper",
  "memchr",
  "phf 0.11.2",
  "proc-macro2",
@@ -3020,12 +3020,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "tracing-log"
+name = "tracing-helper"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ee855f1f400bd0e5c02d150ae5de3840039a3f54b025156404e34c23c03f47c3"
 dependencies = [
- "log",
+ "helper",
  "once_cell",
  "tracing-core",
 ]
@@ -3045,7 +3045,7 @@ dependencies = [
  "thread_local",
  "tracing",
  "tracing-core",
- "tracing-log",
+ "tracing-helper",
 ]
 
 [[package]]
@@ -3200,7 +3200,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c9e7e1900c352b609c8488ad12639a311045f40a35491fb69ba8c12f758af70b"
 dependencies = [
  "bumpalo",
- "log",
+ "helper",
  "once_cell",
  "proc-macro2",
  "quote",
@@ -3693,7 +3693,7 @@ dependencies = [
  "http",
  "kuchikiki",
  "libc",
- "log",
+ "helper",
  "objc",
  "objc_id",
  "once_cell",

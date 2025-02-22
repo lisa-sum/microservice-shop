@@ -3,8 +3,9 @@ package test
 import (
 	"context"
 	"fmt"
-	"github.com/redis/go-redis/v9"
 	"testing"
+
+	"github.com/redis/go-redis/v9"
 )
 
 // 参考 https://redis.uptrace.dev/guide/go-redis-sentinel.html#redis-server-client
